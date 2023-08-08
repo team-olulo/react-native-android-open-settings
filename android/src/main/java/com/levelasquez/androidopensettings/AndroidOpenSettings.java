@@ -134,6 +134,17 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethodpublic void appLocaleSettings() {
+        Intent intent = new Intent(Settings.ACTION_APP_LOCALE_SETTINGS);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setData(Uri.parse("package:" + reactContext.getPackageName()));
+        
+        if (intent.resolveActivity(reactContext.getPackageManager()) != null) {
+            reactContext.startActivity(intent);    
+        }
+    }
+
     @ReactMethod
     public void inputMethodSettings() {
         Intent intent = new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS);
